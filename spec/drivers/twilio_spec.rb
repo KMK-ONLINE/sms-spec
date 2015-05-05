@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'twilio-ruby'
 
 describe SmsSpec do
   include SmsSpec::Helpers

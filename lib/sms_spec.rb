@@ -12,4 +12,8 @@ module SmsSpec
   def self.driver=(driver_sym)
     require "sms_spec/drivers/#{driver_sym.to_s}"
   end
+
+  def self.unload_driver=(driver_sym)
+    require "sms_spec/drivers/unloads/#{driver_sym.to_s}"
+  end
 end

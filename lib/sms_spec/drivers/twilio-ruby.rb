@@ -2,6 +2,7 @@ module Twilio
   module REST
     class Client
 
+      alias_method :initialize_original, :initialize
       def initialize(account_sid, auth_token)
         $account_sid = account_sid
       end
@@ -27,6 +28,7 @@ module Twilio
         end
       end
 
+      alias_method :account_original, :account
       def account
         account = Account.new
         account.class.send(:define_method, :sid, lambda { $account_sid })

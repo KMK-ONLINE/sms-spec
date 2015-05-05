@@ -19,7 +19,8 @@ end
 </pre>
 
 ## RSpec
-In your spec_helper.rb file configure a driver and include helper and matcher methods.
+In your spec_helper.rb file configure a driver and include helper and matcher
+methods.
 
 <pre>
 require 'sms_spec'
@@ -28,8 +29,20 @@ Spec::Runner.configure do |config|
   config.include(SmsSpec::Helpers)
   config.include(SmsSpec::Matchers)
 end
+</pre>
 
-SmsSpec.driver = :twilio-ruby #this can be any available sms-spec driver
+To safely use this gem without overriding twilio globally, assign the driver on
+the test file you would like to use with the proper context, and safely unload
+the driver, current available safe unloading only exists for twilio-ruby.
+
+<pre>
+before(:all) do
+  SmsSpec.driver = :'twilio-ruby' #this can be any available sms-spec driver
+end
+
+after(:all) do
+  SmsSpec.unload_driver = :'twilio-ruby'
+end
 </pre>
 
 ## Cucumber
