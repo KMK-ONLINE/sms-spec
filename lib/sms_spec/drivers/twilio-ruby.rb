@@ -1,12 +1,6 @@
 module Twilio
   module REST
-    class Client
-
-      alias_method :initialize_original, :initialize
-      def initialize(account_sid, auth_token)
-        $account_sid = account_sid
-      end
-
+    class Api
       class Messages
         include SmsSpec::Helpers
 
@@ -33,6 +27,13 @@ module Twilio
         account = Account.new
         account.class.send(:define_method, :sid, lambda { $account_sid })
         account
+      end
+    end
+
+    class Client
+      alias_method :initialize_original, :initialize
+      def initialize(account_sid, auth_token)
+        $account_sid = account_sid
       end
     end
   end

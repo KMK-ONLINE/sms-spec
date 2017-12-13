@@ -18,7 +18,7 @@ describe SmsSpec do
       auth_token = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
       @client = Twilio::REST::Client.new account_sid, auth_token
-      @client.account.messages.create(
+      @client.api.account.messages.create(
         :from => '+14159341234',
         :to => '+16105557069',
         :body => 'Hey there!'
@@ -33,7 +33,7 @@ describe SmsSpec do
       auth_token = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
       @client = Twilio::REST::Client.new account_sid, auth_token
-      @client.account.messages.create(
+      @client.api.account.messages.create(
         :from => '+14159341234',
         :to => '+16105557069',
         :body => 'Hey there!'
@@ -41,8 +41,8 @@ describe SmsSpec do
 
       open_last_text_message_for("+16105557069")
       expect(current_text_message).to_not be_nil
-      expect(@client.account).to respond_to(:sid)
-      expect(@client.account.sid).to be(account_sid)
+      expect(@client.api.account).to respond_to(:sid)
+      expect(@client.api.account.sid).to be(account_sid)
     end
 
     it "records the from number for a message" do
@@ -50,7 +50,7 @@ describe SmsSpec do
       auth_token = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
       @client = Twilio::REST::Client.new account_sid, auth_token
-      @client.account.messages.create(
+      @client.api.account.messages.create(
         :from => '+14159341234',
         :to => '+16105557069',
         :body => 'Hey there!'
